@@ -44,7 +44,7 @@ class UFunc():
         dialog.setFileMode(QFileDialog.AnyFile) # lock the location to the txt dataset folder
         # fname = dialog.getOpenFileName()
         self.fileName = QFileDialog.getOpenFileName(self,
-            "Open annotation file", "/mnt/c/Users/rajitha/Documents/escape/ui", "text Files (*.txt)")
+            "Open annotation file", "./test_txt", "text Files (*.txt)")
         # fname = dialog.getExistingDirectory()
         print(self.fileName[0])
         # get the file name and get the index ()
@@ -106,7 +106,7 @@ class UFunc():
                 f.write('\n')
                 token_index = token_index + 1
             print('-----------')
-            f.write('\n\n')
+            f.write('\n')
         f.close()
         # print(text)
         # print(tokens)
@@ -168,15 +168,20 @@ class UFunc():
         # print(self.selection_list)
              
         self.html = "<p>"
+        html2 = "<p style='line-height: 30px;'>"
         left = 0
         for i, gap in enumerate(self.selection_list):
             self.html = self.html + text[left:gap[0]]
+            html2 = html2 + text[left:gap[0]]
             if gap[2] != "":
                 self.html = self.html + "<font color={1}>{0}</font>".format(text[gap[0]:gap[1]], tag_dict[gap[2]]['color'])
+                html2 = html2 + "<font style='color: #ffffff;background-color: {1};padding: 5px 10px;border-radius: 5px;'>{0}</font>".format(text[gap[0]:gap[1]], tag_dict[gap[2]]['color'])
             else:
                 self.html = self.html + "{0}".format(text[gap[0]:gap[1]])
+                html2 = html2 + "{0}".format(text[gap[0]:gap[1]])
             left = gap[1]
         self.html = self.html + "{0}</p>".format(text[self.selection_list[-1][1]:])
+        html2 = html2 + "{0}</p>".format(text[self.selection_list[-1][1]:])
         if clear >= 0:
             self.selection_list.pop(clear)
         html = self.html.split("\n")
@@ -184,11 +189,19 @@ class UFunc():
         for line in html[:-1]:
             self.html =  self.html + line + '<br>'
         self.html =  self.html + html[-1]
-        # print(self.html)
+        print(self.html)
+
+        html = html2.split("\n")
+        html2 = ''
+        for line in html[:-1]:
+            html2 =  html2 + line + '<br>'
+        html2 =  html2 + html[-1]
+        print(html2)
         # print(self.edit.verticalScrollBar().value())
         val = self.edit.verticalScrollBar().value()
         self.edit.clear()
-        self.edit.appendHtml(self.html)
+        # self.edit.appendHtml(self.html)
+        self.edit.appendHtml(html2)
         self.edit.verticalScrollBar().setSliderPosition(val)
 
     def handleSelectionChanged(self):
