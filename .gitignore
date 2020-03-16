@@ -127,3 +127,13 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# data files
+dataset/
+scrapes/
+test_txt/
+manual_annot_txt/
+*.tar.gz
+#test scripts and salvageables 
+*_test.py
+*.ipynb

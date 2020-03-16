@@ -13,7 +13,6 @@ class Form(QDialog, UFunc):
         self.setWindowTitle("Annotator")
         self.edit = QPlainTextEdit('')
         self.info_box = QPlainTextEdit('')
-
         self.quit = QPushButton("QUIT")
         self.quit.clicked.connect(app.exit)
 

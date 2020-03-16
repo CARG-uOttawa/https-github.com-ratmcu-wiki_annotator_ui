@@ -150,7 +150,7 @@ class UFunc():
                 print('overlapping annotations, please clear the annotation and try')
                 return
                             
-        text = self.edit.toPlainText()    
+        text = self.edit.toPlainText()
         # print(text)
         
         if not found and tag != '':
